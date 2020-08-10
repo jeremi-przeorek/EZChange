@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EZChange.Android", "EZChang
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EZChange.iOS", "EZChange\EZChange.iOS\EZChange.iOS.csproj", "{03F8127B-D735-4A83-B484-CBE81B06ED57}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EZChange", "EZChange\EZChange\EZChange.csproj", "{7794D747-47E3-410D-8878-18F351C30778}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EZChange", "EZChange\EZChange\EZChange.csproj", "{7794D747-47E3-410D-8878-18F351C30778}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

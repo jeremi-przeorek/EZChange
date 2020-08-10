@@ -11,7 +11,8 @@ namespace EZChange
         {
             InitializeComponent();
 
-            MainPage = new IngredientsPage();
+            //MainPage = new IngredientsPage();
+            MainPage = new MainPage();
         }
 
         protected override void OnStart()

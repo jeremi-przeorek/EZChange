@@ -19,7 +19,6 @@ namespace EZChange
         public MainPage()
         {
             Children.Add(new IngredientsPage());
-            Children.Add(new Page1());
 
             InitializeComponent();
         }

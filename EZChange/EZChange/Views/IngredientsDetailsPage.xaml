@@ -14,22 +14,20 @@
             <ProgressBar Progress="10"></ProgressBar>
             <Label Text="Actual amount:"
                    FontSize="Large"
-                   BackgroundColor="Accent"
                    HorizontalOptions="Center"></Label>
             <Label Text="{Binding Ingredient.ActualAmount}" 
-                       FontSize="Title"
-                       HorizontalOptions="Center"
-                   BackgroundColor="Yellow"></Label>
+                   FontSize="Title"
+                   HorizontalOptions="Center"></Label>
             <Label Text="Set new amount"
                    FontSize="Large"
-                   Padding="20"
-                   BackgroundColor="Accent"></Label>
-            <Picker>
-                <Picker.Items>
-                    <x:String>100</x:String>
-                    <x:String>200</x:String>
-                </Picker.Items>
-            </Picker>
+                   Padding="20"></Label>
+            <Entry x:Name="NewAmount" 
+                   Placeholder="New Amount"
+                   Keyboard="Numeric"></Entry>
+            <Button Text="Set new amount" 
+                    CornerRadius="10"
+                    BackgroundColor="Silver">
+            </Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

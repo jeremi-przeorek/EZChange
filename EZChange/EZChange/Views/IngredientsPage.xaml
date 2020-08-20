@@ -10,23 +10,20 @@
             <Button Text="Sort by" 
                     Clicked="Button_SortBy_Clicked"
                     Margin="0,20,0,0"
-                    FontSize="Header"></Button>
+                    FontSize="Title"></Button>
             <ListView HasUnevenRows="True" ItemsSource="{Binding Ingredients}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
-                            <StackLayout Orientation="Vertical" Padding="10">
+                        <ViewCell Height="60">
+                            <StackLayout Orientation="Horizontal" VerticalOptions="Center">
                                 <Label Text="{Binding Name}"
-                                       FontSize="Header"></Label>
-                                <StackLayout Orientation="Horizontal">
-                                    <Label Text="{Binding ActualAmount}"></Label>
-                                    <Label Text="/"></Label>
-                                    <Label Text="{Binding MaxAmount}"></Label>
-                                    <ProgressBar Progress="{Binding AmountPercentage}" 
-                                             HorizontalOptions="FillAndExpand"
-                                             ProgressColor="{Binding Color}"></ProgressBar>
-                                </StackLayout>
-
+                                       FontSize="Title"
+                                       Margin="20"></Label>
+                                <Label Text="{Binding ActualAmount}"
+                                       HorizontalOptions="EndAndExpand"
+                                       FontSize="Title"
+                                       TextColor="{Binding Color}"
+                                       Margin="20"></Label>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

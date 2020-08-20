@@ -1,4 +1,6 @@
-﻿using System;
+﻿using EZChange.Models;
+using EZChange.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,8 +14,10 @@ namespace EZChange.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class IngredientsDetailsPage : ContentPage
     {
-        public IngredientsDetailsPage()
+        public IngredientsDetailsPage(Ingredient ingredient)
         {
+            BindingContext = new IngredientsDetailPageViewModel(ingredient);
+
             InitializeComponent();
         }
     }

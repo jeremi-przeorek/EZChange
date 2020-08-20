@@ -15,23 +15,30 @@ namespace EZChange.Views
     {
         public IngredientsPage()
         {
-            BindingContext = new IngredientsViewModel();
+            BindingContext = new IngredientsViewModel(new PageService());
 
             InitializeComponent();
         }
 
         async private void Button_SortBy_Clicked(object sender, EventArgs e)
-        { 
+        {
             var response = await DisplayActionSheet(
                 "Sort by",
                 "Cancel",
                 null,
                 "%",
                 "Number");
-            if (response == "%")
-            {
-                ((IngredientsViewModel)BindingContext).SortPlaylistCommand.Execute(null) ;
-            }
+        }
+
+        private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            ViewModel.ShowIngredientDetailPageCommand.Execute(e.Item);
+        }
+
+        private IngredientsViewModel ViewModel
+        {
+            get { return BindingContext as IngredientsViewModel; }
+            set { BindingContext = value; }
         }
     }
 }

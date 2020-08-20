@@ -5,7 +5,7 @@ using Xamarin.Forms;
 
 namespace EZChange.Models
 {
-    class Ingredient
+    public class Ingredient
     {
         public string Name { get; set; }
         public int ActualAmount { get; set; }

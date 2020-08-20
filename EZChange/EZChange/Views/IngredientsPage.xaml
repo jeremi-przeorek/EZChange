@@ -8,10 +8,12 @@
     <ContentPage.Content>
         <StackLayout>
             <Button Text="Sort by" 
-                    Clicked="Button_SortBy_Clicked"
+                    Command="{Binding DisplaySortByOptionsCommand}"
                     Margin="0,20,0,0"
                     FontSize="Title"></Button>
-            <ListView HasUnevenRows="True" ItemsSource="{Binding Ingredients}">
+            <ListView HasUnevenRows="True" 
+                      ItemTapped="ListView_ItemTapped"
+                      ItemsSource="{Binding Ingredients}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell Height="60">

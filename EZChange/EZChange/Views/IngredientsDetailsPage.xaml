@@ -6,26 +6,30 @@
              mc:Ignorable="d"
              x:Class="EZChange.Views.IngredientsDetailsPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Ingr name"
-                   FontSize="Large"
+        <StackLayout HorizontalOptions="Center">
+            <Label Text="{Binding Ingredient.Name}"
+                   FontSize="Title"
                    HorizontalOptions="Center" 
                    Padding="20"></Label>
             <ProgressBar Progress="10"></ProgressBar>
-            <StackLayout Orientation="Horizontal" 
-                         HorizontalOptions="Center" 
-                         Padding="20">
-                <Label Text="12" 
-                       FontSize="Large"></Label>
-                <Label Text="/" 
-                       FontSize="Large"></Label>
-                <Label Text="256" 
-                       FontSize="Large"></Label>
-            </StackLayout>
-            <Slider Minimum="0" 
-                    Maximum="2000"
-                    x:Name="MlSlider"></Slider>
-            <Label Text="Test"></Label>
+            <Label Text="Actual amount:"
+                   FontSize="Large"
+                   BackgroundColor="Accent"
+                   HorizontalOptions="Center"></Label>
+            <Label Text="{Binding Ingredient.ActualAmount}" 
+                       FontSize="Title"
+                       HorizontalOptions="Center"
+                   BackgroundColor="Yellow"></Label>
+            <Label Text="Set new amount"
+                   FontSize="Large"
+                   Padding="20"
+                   BackgroundColor="Accent"></Label>
+            <Picker>
+                <Picker.Items>
+                    <x:String>100</x:String>
+                    <x:String>200</x:String>
+                </Picker.Items>
+            </Picker>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

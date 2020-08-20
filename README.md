@@ -1,2 +1,2 @@
 # EZChange
-Xamarin Forms application build with MVVM pattern to operate Robbie Drink cell without disturbing users.
+Xamarin Forms application build with MVVM pattern to operate Robbie Drink cell without interupting users.

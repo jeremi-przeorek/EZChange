@@ -37,6 +37,7 @@ namespace EZChange.ViewModels
             _pageService = pageService;
         }
 
+        public string Title => "Amounts list";
         private IPageService _pageService;
         private ObservableCollection<Ingredient> _ingredients;
         public ObservableCollection<Ingredient> Ingredients

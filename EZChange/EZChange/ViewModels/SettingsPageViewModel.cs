@@ -7,7 +7,7 @@ namespace EZChange.ViewModels
 {
     public class SettingsPageViewModel : BaseViewModel
     {
-        public string Title = "Settings";
+        public string Title => "Settings";
 
         public string IP
         {

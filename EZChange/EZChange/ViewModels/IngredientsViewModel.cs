@@ -59,10 +59,11 @@ namespace EZChange.ViewModels
                         ingredient)));
         }
 
-        private void SortIngredientsBy(string key)
+        private ObservableCollection<Ingredient> Sort(
+            ObservableCollection<Ingredient> ingredients, string key)
         {
-            Ingredients = new ObservableCollection<Ingredient>(
-                Ingredients.OrderBy(a => a.GetType().GetProperty(key).GetValue(a, null)).
+            return new ObservableCollection<Ingredient>(
+                ingredients.OrderBy(a => a.GetType().GetProperty(key).GetValue(a, null)).
                 ToList());
         }
 
@@ -78,7 +79,10 @@ namespace EZChange.ViewModels
 
             var propsToDisplay = tempProps.ToArray();
             var response = await _pageService.DisplayActionSheet("Sort by", "Cancel", null, propsToDisplay);
-            SortIngredientsBy(response);
+            if(response != "Cancel")
+            {
+                Ingredients = Sort(Ingredients, response);
+            }
         }
 
         private async void DisplaySettingsPage()

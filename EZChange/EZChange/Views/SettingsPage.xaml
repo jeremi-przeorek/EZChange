@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="EZChange.Views.SettingsPage"
+             Title="{Binding Title}">
+    <ContentPage.Content>
+        <TableView>
+            <TableRoot>
+                <TableSection Title="Tcp Socket">
+                    <EntryCell Label="IP"
+                               Text="{Binding IP, Mode=TwoWay}"
+                               Keyboard="Numeric">
+                    </EntryCell>
+                    <EntryCell Label="Gateway"
+                               Text="{Binding Gateway, Mode=TwoWay}"
+                               Keyboard="Numeric">
+                    </EntryCell>
+                </TableSection>
+            </TableRoot>
+        </TableView>
+    </ContentPage.Content>
+</ContentPage>

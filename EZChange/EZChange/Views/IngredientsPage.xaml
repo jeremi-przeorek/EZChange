@@ -7,10 +7,16 @@
              x:Class="EZChange.Views.IngredientsPage">
     <ContentPage.Content>
         <StackLayout>
-            <Button Text="Sort by" 
+            <StackLayout Orientation="Horizontal"
+                         Margin="20,0,20,0">
+                <Button Text="Sort by"
                     Command="{Binding DisplaySortByOptionsCommand}"
-                    Margin="0,20,0,0"
-                    FontSize="Title"></Button>
+                    FontSize="Large"></Button>
+                <Button Text="Settings"
+                        Command="{Binding DisplaySettingsPageCommand}"
+                        HorizontalOptions="EndAndExpand"
+                        FontSize="Large"></Button>
+            </StackLayout>
             <ListView HasUnevenRows="True" 
                       ItemTapped="ListView_ItemTapped"
                       ItemsSource="{Binding Ingredients}">

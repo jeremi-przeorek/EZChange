@@ -29,6 +29,7 @@ namespace EZChange.ViewModels
 
             ShowIngredientDetailPageCommand = new Command<Ingredient>(vm => ShowIngredientDetailPage(vm));
             DisplaySortByOptionsCommand = new Command(DisplaySordByOptions);
+            DisplaySettingsPageCommand = new Command(DisplaySettingsPage);
         }
 
         public IngredientsViewModel(IPageService pageService) : this()
@@ -46,6 +47,8 @@ namespace EZChange.ViewModels
 
         public ICommand ShowIngredientDetailPageCommand { get; private set; }
         public ICommand DisplaySortByOptionsCommand { get; private set; }
+
+        public ICommand DisplaySettingsPageCommand { get; private set; }
 
         private void ShowIngredientDetailPage(Ingredient ingredient)
         {
@@ -75,6 +78,11 @@ namespace EZChange.ViewModels
             var propsToDisplay = tempProps.ToArray();
             var response = await _pageService.DisplayActionSheet("Sort by", "Cancel", null, propsToDisplay);
             SortIngredientsBy(response);
+        }
+
+        private async void DisplaySettingsPage()
+        {
+            await _pageService.PushAsync(new SettingsPage());
         }
     }
 }

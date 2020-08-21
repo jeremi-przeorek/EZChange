@@ -6,18 +6,23 @@
              mc:Ignorable="d"
              x:Class="EZChange.Views.IngredientsPage"
              Title="{Binding Title}">
-    <ContentPage.Content>
-        <StackLayout>
-            <StackLayout Orientation="Horizontal"
-                         Margin="20,0,20,0">
-                <Button Text="Sort by"
-                    Command="{Binding DisplaySortByOptionsCommand}"
-                    FontSize="Large"></Button>
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <Button Text="Sort by" 
+                        Command="{Binding DisplaySortByOptionsCommand}"
+                    HorizontalOptions="StartAndExpand"></Button>
+            <Label Text="{Binding Title}"
+                   HorizontalOptions="CenterAndExpand"
+                   VerticalOptions="CenterAndExpand"
+                   FontAttributes="Bold"
+                   FontSize="Header"></Label>
                 <Button Text="Settings"
                         Command="{Binding DisplaySettingsPageCommand}"
-                        HorizontalOptions="EndAndExpand"
-                        FontSize="Large"></Button>
+                        HorizontalOptions="EndAndExpand"></Button>
             </StackLayout>
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <StackLayout>
             <ListView HasUnevenRows="True" 
                       ItemTapped="ListView_ItemTapped"
                       ItemsSource="{Binding Ingredients}">

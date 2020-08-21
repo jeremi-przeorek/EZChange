@@ -49,7 +49,10 @@ namespace EZChange.ViewModels
 
         private void ShowIngredientDetailPage(Ingredient ingredient)
         {
-            _pageService.PushAsync(new IngredientsDetailsPage(ingredient));
+            _pageService.PushAsync(
+                new IngredientsDetailsPage(
+                    new IngredientsDetailPageViewModel(
+                        ingredient)));
         }
 
         private void SortIngredientsBy(string key)

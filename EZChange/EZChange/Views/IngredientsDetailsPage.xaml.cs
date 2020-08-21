@@ -14,9 +14,9 @@ namespace EZChange.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class IngredientsDetailsPage : ContentPage
     {
-        public IngredientsDetailsPage(Ingredient ingredient)
+        public IngredientsDetailsPage(IngredientsDetailPageViewModel ingredientsDetailPageViewModel)
         {
-            BindingContext = new IngredientsDetailPageViewModel(ingredient);
+            BindingContext = ingredientsDetailPageViewModel;
 
             InitializeComponent();
         }

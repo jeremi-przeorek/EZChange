@@ -6,7 +6,7 @@ using System.Text;
 
 namespace EZChange.ViewModels
 {
-    class IngredientsDetailPageViewModel : BaseViewModel
+    public class IngredientsDetailPageViewModel : BaseViewModel
     {
         public IngredientsDetailPageViewModel(Ingredient ingredient)
         {

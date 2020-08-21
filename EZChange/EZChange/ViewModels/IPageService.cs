@@ -9,6 +9,7 @@ namespace EZChange.ViewModels
     interface IPageService
     {
         Task PushAsync(Page page);
-        Task<string> DisplayActionSheet(string title, string cancel, string destruction, params string[] buttons);
+        Task<string> DisplayActionSheet(
+            string title, string cancel, string destruction, params string[] buttons);
     }
 }

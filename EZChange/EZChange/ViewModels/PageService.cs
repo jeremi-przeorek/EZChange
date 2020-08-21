@@ -10,7 +10,8 @@ namespace EZChange.ViewModels
     {
         public async Task<string> DisplayActionSheet(string title, string cancel, string destruction, params string[] buttons)
         {
-            return await Application.Current.MainPage.DisplayActionSheet(title, cancel, destruction, buttons);
+            return await Application.Current.MainPage.DisplayActionSheet(
+                title, cancel, destruction, buttons);
         }
 
         public async Task PushAsync(Page page)

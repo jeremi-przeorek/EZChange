@@ -7,19 +7,24 @@
              x:Class="EZChange.Views.SettingsPage"
              Title="{Binding Title}">
     <ContentPage.Content>
-        <TableView>
-            <TableRoot>
-                <TableSection Title="Tcp Socket">
-                    <EntryCell Label="IP"
+        <StackLayout>
+            <TableView>
+                <TableRoot>
+                    <TableSection Title="Tcp Socket">
+                        <EntryCell Label="IP"
                                Text="{Binding IP, Mode=TwoWay}"
                                Keyboard="Numeric">
-                    </EntryCell>
-                    <EntryCell Label="Gateway"
-                               Text="{Binding Gateway, Mode=TwoWay}"
+                        </EntryCell>
+                        <EntryCell Label="Gateway"
+                               Text="{Binding Port, Mode=TwoWay}"
                                Keyboard="Numeric">
-                    </EntryCell>
-                </TableSection>
-            </TableRoot>
-        </TableView>
+                        </EntryCell>
+                    </TableSection>
+                </TableRoot>
+            </TableView>
+            <Button Text="Connect"
+                    Command="{Binding Connect}"></Button>
+            <Label Text="{Binding TcpStatus}"></Label>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

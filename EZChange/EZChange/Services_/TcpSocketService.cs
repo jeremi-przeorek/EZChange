@@ -1,4 +1,6 @@
-﻿using System;
+﻿using EZChange.Models.TcpSocket;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Sockets;
@@ -26,6 +28,11 @@ namespace EZChange.Services_
             }
         }
 
-
+        public static void Send(TcpSocketRequest request)
+        {
+            var serializedRequest = JsonConvert.SerializeObject(request);
+            byte[] data = System.Text.Encoding.ASCII.GetBytes(serializedRequest);
+            _stream.Write(data, 0, data.Length);
+        }
     }
 }

@@ -21,10 +21,11 @@
             <Label Text="Set new amount"
                    FontSize="Large"
                    Padding="20"></Label>
-            <Entry x:Name="NewAmount" 
+            <Entry Text="{Binding NewAmount, Mode=TwoWay}"
                    Placeholder="New Amount"
                    Keyboard="Numeric"></Entry>
             <Button Text="Set new amount" 
+                    Command="{Binding SetNewAmountCommand}"
                     CornerRadius="10"
                     BackgroundColor="Silver">
             </Button>

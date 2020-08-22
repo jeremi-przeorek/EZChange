@@ -14,7 +14,7 @@ namespace EZChange.ViewModels
 {
     class IngredientsViewModel : BaseViewModel
     {
-        public IngredientsViewModel()
+        public IngredientsViewModel(IPageService pageService) : base(pageService)
         {
             #region GenerateDummyIngredients
             var indg1 = new Ingredient { Name = "Wodka", ActualAmount = 120 };
@@ -32,13 +32,7 @@ namespace EZChange.ViewModels
             DisplaySettingsPageCommand = new Command(DisplaySettingsPage);
         }
 
-        public IngredientsViewModel(IPageService pageService) : this()
-        {
-            _pageService = pageService;
-        }
-
         public string Title => "Amounts list";
-        private IPageService _pageService;
         private ObservableCollection<Ingredient> _ingredients;
         public ObservableCollection<Ingredient> Ingredients
         {
@@ -53,10 +47,10 @@ namespace EZChange.ViewModels
 
         private void ShowIngredientDetailPage(Ingredient ingredient)
         {
-            _pageService.PushAsync(
+            base._pageService.PushAsync(
                 new IngredientsDetailsPage(
                     new IngredientsDetailPageViewModel(
-                        ingredient)));
+                        ingredient, base._pageService)));
         }
 
         private ObservableCollection<Ingredient> Sort(

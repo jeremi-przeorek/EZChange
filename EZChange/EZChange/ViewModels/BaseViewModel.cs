@@ -8,7 +8,18 @@ namespace EZChange.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
+        protected BaseViewModel()
+        {
+        }
+
+        protected BaseViewModel(IPageService pageService)
+        {
+            _pageService = pageService;
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
+
+        protected IPageService _pageService;
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

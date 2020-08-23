@@ -1,12 +1,11 @@
 ﻿using EZChange.Models;
+using EZChange.Models.TcpSocket;
+using EZChange.Services_;
 using EZChange.Views;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -30,6 +29,7 @@ namespace EZChange.ViewModels
             ShowIngredientDetailPageCommand = new Command<Ingredient>(vm => ShowIngredientDetailPage(vm));
             DisplaySortByOptionsCommand = new Command(DisplaySordByOptions);
             DisplaySettingsPageCommand = new Command(DisplaySettingsPage);
+            RefreshIngredientsListCommand = new Command(RefreshIngredientsList);
         }
 
         public string Title => "Amounts list";
@@ -42,8 +42,16 @@ namespace EZChange.ViewModels
 
         public ICommand ShowIngredientDetailPageCommand { get; private set; }
         public ICommand DisplaySortByOptionsCommand { get; private set; }
-
+        public ICommand RefreshIngredientsListCommand { get; private set; }
         public ICommand DisplaySettingsPageCommand { get; private set; }
+
+        private bool _isRefreshing;
+        public bool IsRefreshing
+        {
+            get { return _isRefreshing; }
+            set { SetValue(ref _isRefreshing, value); }
+        }
+
 
         private void ShowIngredientDetailPage(Ingredient ingredient)
         {
@@ -82,6 +90,22 @@ namespace EZChange.ViewModels
         private async void DisplaySettingsPage()
         {
             await _pageService.PushAsync(new SettingsPage());
+        }
+
+        private void RefreshIngredientsList()
+        {
+            var request = new TcpSocketRequest
+            {
+                TcpRequestType = TcpRequestType.GetIngredientAmount,
+                Target = "All",
+                Value = 0,
+            };
+
+            TcpSocketService.Send(request);
+            Ingredients = new ObservableCollection<Ingredient>(
+                TcpSocketService.GetResponse());
+
+            IsRefreshing = false;
         }
     }
 }

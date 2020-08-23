@@ -37,7 +37,7 @@ namespace EZChange.Services_
             _stream.Write(data, 0, data.Length);
         }
 
-        public static IEnumerable<Ingredient> GetResponse()
+        public static T GetResponse<T>()
         {
             // Buffer to store the response bytes.
             byte[] data2 = new Byte[256];
@@ -49,9 +49,9 @@ namespace EZChange.Services_
             Int32 bytes = _stream.Read(data2, 0, data2.Length);
             responseData = System.Text.Encoding.ASCII.GetString(data2, 0, bytes);
 
-            var ingredient = JsonConvert.DeserializeObject<Ingredient>(responseData);
+            var response = JsonConvert.DeserializeObject<T>(responseData);
 
-            return new List<Ingredient> { ingredient };
+            return  response;
         }
     }
 }

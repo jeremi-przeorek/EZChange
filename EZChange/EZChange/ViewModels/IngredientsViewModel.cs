@@ -103,7 +103,7 @@ namespace EZChange.ViewModels
 
             TcpSocketService.Send(request);
             Ingredients = new ObservableCollection<Ingredient>(
-                TcpSocketService.GetResponse());
+                TcpSocketService.GetResponse<IEnumerable<Ingredient>>());
 
             IsRefreshing = false;
         }

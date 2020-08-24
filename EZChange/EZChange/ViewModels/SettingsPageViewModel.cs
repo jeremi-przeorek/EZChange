@@ -40,8 +40,9 @@ namespace EZChange.ViewModels
 
         public void ConnectTcp()
         {
-            var status = TcpSocketService.Connect(Settings.TcpSocketIp, Settings.TcpSocketPort);
-            TcpStatus = status.ToString();
+            string tcpSocketIp = Settings.TcpSocketIp.Replace(',', '.');
+            var status = TcpSocketService.Connect(tcpSocketIp, Settings.TcpSocketPort);
+            TcpStatus = status;
         }
     }
 }

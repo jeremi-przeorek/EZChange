@@ -56,6 +56,8 @@ namespace EZChange.ViewModels
             {
                 _pageService.DisplayAlert("Error", e.Message.ToString(), "Ok");
             }
+
+            Ingredient = TcpSocketService.GetResponse<Ingredient>();
         }
     }
 }

@@ -2,6 +2,7 @@
 using EZChange.Models.TcpSocket;
 using EZChange.Services_;
 using EZChange.Views;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -101,9 +102,16 @@ namespace EZChange.ViewModels
                 Value = 0,
             };
 
+            try
+            {
             TcpSocketService.Send(request);
             Ingredients = new ObservableCollection<Ingredient>(
                 TcpSocketService.GetResponse<IEnumerable<Ingredient>>());
+            }
+            catch(Exception e)
+            {
+                _pageService.DisplayAlert("Erro", e.Message.ToString(), "Ok");
+            }
 
             IsRefreshing = false;
         }

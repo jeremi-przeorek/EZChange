@@ -2,9 +2,6 @@
 using EZChange.Models.TcpSocket;
 using EZChange.Services_;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -28,13 +25,11 @@ namespace EZChange.ViewModels
         }
 
         private int _newAmount;
-
         public int NewAmount
         {
             get { return _newAmount; }
             set { SetValue(ref _newAmount, value); }
         }
-
 
         public ICommand SetNewAmountCommand { get; private set; }
 

@@ -1,8 +1,6 @@
 ﻿using EZChange.Helpers;
 using EZChange.Services_;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -40,9 +38,16 @@ namespace EZChange.ViewModels
 
         public void ConnectTcp()
         {
-            string tcpSocketIp = Settings.TcpSocketIp.Replace(',', '.');
-            var status = TcpSocketService.Connect(tcpSocketIp, Settings.TcpSocketPort);
-            TcpStatus = status;
+            try
+            {
+                string tcpSocketIp = Settings.TcpSocketIp.Replace(',', '.');
+                var status = TcpSocketService.Connect(tcpSocketIp, Settings.TcpSocketPort);
+                TcpStatus = status.ToString();
+            }
+            catch (Exception e)
+            {
+                _pageService.DisplayAlert("Error", e.Message.ToString(), "Ok");
+            }
         }
     }
 }

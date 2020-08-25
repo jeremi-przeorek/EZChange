@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace EZChange.Models.TcpSocket
+﻿namespace EZChange.Models.TcpSocket
 {
     public enum TcpRequestType
     {

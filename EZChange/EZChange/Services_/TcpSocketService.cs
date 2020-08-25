@@ -1,12 +1,7 @@
-﻿using EZChange.Models;
-using EZChange.Models.TcpSocket;
+﻿using EZChange.Models.TcpSocket;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading;
 
 namespace EZChange.Services_
 {
@@ -17,17 +12,10 @@ namespace EZChange.Services_
 
         public static bool Connect(string ip, int port)
         {
-            try
-            {
-                _tcpClient = new TcpClient(ip, port);
-                _stream = _tcpClient.GetStream();
+            _tcpClient = new TcpClient(ip, port);
+            _stream = _tcpClient.GetStream();
 
-                return _tcpClient.Connected;
-            }
-            catch (SocketException ea)
-            {
-                return false;
-            }
+            return _tcpClient.Connected;
         }
 
         public static void Send(TcpSocketRequest request)
@@ -51,7 +39,7 @@ namespace EZChange.Services_
 
             var response = JsonConvert.DeserializeObject<T>(responseData);
 
-            return  response;
+            return response;
         }
     }
 }

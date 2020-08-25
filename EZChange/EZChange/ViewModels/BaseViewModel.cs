@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
 
 namespace EZChange.ViewModels
 {
@@ -37,6 +35,5 @@ namespace EZChange.ViewModels
             backingField = value;
             OnPropertyChanged(callerName);
         }
-
     }
 }

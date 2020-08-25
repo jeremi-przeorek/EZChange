@@ -34,17 +34,13 @@ namespace EZChange.ViewModels
         }
 
         public string Title => "Amounts list";
+
         private ObservableCollection<Ingredient> _ingredients;
         public ObservableCollection<Ingredient> Ingredients
         {
             get => _ingredients;
             private set => SetValue(ref _ingredients, value);
         }
-
-        public ICommand ShowIngredientDetailPageCommand { get; private set; }
-        public ICommand DisplaySortByOptionsCommand { get; private set; }
-        public ICommand RefreshIngredientsListCommand { get; private set; }
-        public ICommand DisplaySettingsPageCommand { get; private set; }
 
         private bool _isRefreshing;
         public bool IsRefreshing
@@ -53,6 +49,10 @@ namespace EZChange.ViewModels
             set { SetValue(ref _isRefreshing, value); }
         }
 
+        public ICommand ShowIngredientDetailPageCommand { get; private set; }
+        public ICommand DisplaySortByOptionsCommand { get; private set; }
+        public ICommand RefreshIngredientsListCommand { get; private set; }
+        public ICommand DisplaySettingsPageCommand { get; private set; }
 
         private void ShowIngredientDetailPage(Ingredient ingredient)
         {
@@ -75,14 +75,14 @@ namespace EZChange.ViewModels
             PropertyInfo[] props = typeof(Ingredient).GetProperties();
             List<string> tempProps = new List<string>();
 
-            foreach(var prop in props)
+            foreach (var prop in props)
             {
                 tempProps.Add(prop.Name);
             }
 
             var propsToDisplay = tempProps.ToArray();
             var response = await _pageService.DisplayActionSheet("Sort by", "Cancel", null, propsToDisplay);
-            if(response != "Cancel")
+            if (response != "Cancel")
             {
                 Ingredients = Sort(Ingredients, response);
             }
@@ -104,11 +104,11 @@ namespace EZChange.ViewModels
 
             try
             {
-            TcpSocketService.Send(request);
-            Ingredients = new ObservableCollection<Ingredient>(
-                TcpSocketService.GetResponse<IEnumerable<Ingredient>>());
+                TcpSocketService.Send(request);
+                Ingredients = new ObservableCollection<Ingredient>(
+                    TcpSocketService.GetResponse<IEnumerable<Ingredient>>());
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 _pageService.DisplayAlert("Erro", e.Message.ToString(), "Ok");
             }

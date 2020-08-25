@@ -1,5 +1,4 @@
-﻿// Helpers/Settings.cs
-using Plugin.Settings;
+﻿using Plugin.Settings;
 using Plugin.Settings.Abstractions;
 
 namespace EZChange.Helpers

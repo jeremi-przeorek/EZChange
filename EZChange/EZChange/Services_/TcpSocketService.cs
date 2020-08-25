@@ -28,14 +28,14 @@ namespace EZChange.Services_
         public static T GetResponse<T>()
         {
             // Buffer to store the response bytes.
-            byte[] data2 = new Byte[256];
+            byte[] data = new Byte[2048];
 
             // String to store the response ASCII representation.
             String responseData = String.Empty;
 
             // Read the first batch of the TcpServer response bytes.
-            Int32 bytes = _stream.Read(data2, 0, data2.Length);
-            responseData = System.Text.Encoding.ASCII.GetString(data2, 0, bytes);
+            Int32 bytes = _stream.Read(data, 0, data.Length);
+            responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
 
             var response = JsonConvert.DeserializeObject<T>(responseData);
 

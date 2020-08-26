@@ -1,12 +1,12 @@
 ﻿using EZChange.Models;
+using EZChange.Models.TcpSocket;
+using EZChange.Services_;
 using EZChange.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -14,7 +14,7 @@ namespace EZChange.ViewModels
 {
     class IngredientsViewModel : BaseViewModel
     {
-        public IngredientsViewModel()
+        public IngredientsViewModel(IPageService pageService) : base(pageService)
         {
             #region GenerateDummyIngredients
             var indg1 = new Ingredient { Name = "Wodka", ActualAmount = 120 };
@@ -30,15 +30,11 @@ namespace EZChange.ViewModels
             ShowIngredientDetailPageCommand = new Command<Ingredient>(vm => ShowIngredientDetailPage(vm));
             DisplaySortByOptionsCommand = new Command(DisplaySordByOptions);
             DisplaySettingsPageCommand = new Command(DisplaySettingsPage);
-        }
-
-        public IngredientsViewModel(IPageService pageService) : this()
-        {
-            _pageService = pageService;
+            RefreshIngredientsListCommand = new Command(RefreshIngredientsList);
         }
 
         public string Title => "Amounts list";
-        private IPageService _pageService;
+
         private ObservableCollection<Ingredient> _ingredients;
         public ObservableCollection<Ingredient> Ingredients
         {
@@ -46,17 +42,24 @@ namespace EZChange.ViewModels
             private set => SetValue(ref _ingredients, value);
         }
 
+        private bool _isRefreshing;
+        public bool IsRefreshing
+        {
+            get { return _isRefreshing; }
+            set { SetValue(ref _isRefreshing, value); }
+        }
+
         public ICommand ShowIngredientDetailPageCommand { get; private set; }
         public ICommand DisplaySortByOptionsCommand { get; private set; }
-
+        public ICommand RefreshIngredientsListCommand { get; private set; }
         public ICommand DisplaySettingsPageCommand { get; private set; }
 
         private void ShowIngredientDetailPage(Ingredient ingredient)
         {
-            _pageService.PushAsync(
+            base._pageService.PushAsync(
                 new IngredientsDetailsPage(
                     new IngredientsDetailPageViewModel(
-                        ingredient)));
+                        ingredient, base._pageService)));
         }
 
         private ObservableCollection<Ingredient> Sort(
@@ -72,14 +75,14 @@ namespace EZChange.ViewModels
             PropertyInfo[] props = typeof(Ingredient).GetProperties();
             List<string> tempProps = new List<string>();
 
-            foreach(var prop in props)
+            foreach (var prop in props)
             {
                 tempProps.Add(prop.Name);
             }
 
             var propsToDisplay = tempProps.ToArray();
             var response = await _pageService.DisplayActionSheet("Sort by", "Cancel", null, propsToDisplay);
-            if(response != "Cancel")
+            if (response != "Cancel")
             {
                 Ingredients = Sort(Ingredients, response);
             }
@@ -88,6 +91,29 @@ namespace EZChange.ViewModels
         private async void DisplaySettingsPage()
         {
             await _pageService.PushAsync(new SettingsPage());
+        }
+
+        private void RefreshIngredientsList()
+        {
+            var request = new TcpSocketRequest
+            {
+                TcpRequestType = TcpRequestType.GetIngredientAmount,
+                Target = "All",
+                Value = 0,
+            };
+
+            try
+            {
+                TcpSocketService.Send(request);
+                Ingredients = new ObservableCollection<Ingredient>(
+                    TcpSocketService.GetResponse<IEnumerable<Ingredient>>());
+            }
+            catch (Exception e)
+            {
+                _pageService.DisplayAlert("Erro", e.Message.ToString(), "Ok");
+            }
+
+            IsRefreshing = false;
         }
     }
 }

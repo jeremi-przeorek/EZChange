@@ -1,14 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
 
 namespace EZChange.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
+        protected BaseViewModel()
+        {
+        }
+
+        protected BaseViewModel(IPageService pageService)
+        {
+            _pageService = pageService;
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
+
+        protected IPageService _pageService;
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -26,6 +35,5 @@ namespace EZChange.ViewModels
             backingField = value;
             OnPropertyChanged(callerName);
         }
-
     }
 }

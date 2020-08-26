@@ -1,5 +1,4 @@
-﻿// Helpers/Settings.cs
-using Plugin.Settings;
+﻿using Plugin.Settings;
 using Plugin.Settings.Abstractions;
 
 namespace EZChange.Helpers
@@ -40,24 +39,24 @@ namespace EZChange.Helpers
             }
         }
 
-        #region Tcp Socket Gateway Constants
+        #region Tcp Socket Port Constants
 
-        private const string TcpSocketGatewaySettingsKey = "tcp_socket_gateway";
-        private static readonly string TcpSocketGatewaySettingsDefault = "255.255.255.0";
+        private const string TcpSocketPortSettingsKey = "tcp_socket_port";
+        private static readonly int TcpSocketPortSettingsDefault = 57000;
 
         #endregion
 
-        public static string TcpSocketGateway
+        public static int TcpSocketPort
         {
             get
             {
                 return AppSettings.GetValueOrDefault(
-                    TcpSocketGatewaySettingsKey, TcpSocketGatewaySettingsDefault);
+                    TcpSocketPortSettingsKey, TcpSocketPortSettingsDefault);
             }
             set
             {
                 AppSettings.AddOrUpdateValue(
-                    TcpSocketGatewaySettingsKey, value);
+                    TcpSocketPortSettingsKey, value);
             }
         }
     }

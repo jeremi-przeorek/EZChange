@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace EZChange.ViewModels
@@ -17,6 +14,11 @@ namespace EZChange.ViewModels
         public async Task PushAsync(Page page)
         {
             await Application.Current.MainPage.Navigation.PushAsync(page);
+        }
+
+        public async Task DisplayAlert(string title, string message, string cancel)
+        {
+            await Application.Current.MainPage.DisplayAlert(title, message, cancel);
         }
     }
 }

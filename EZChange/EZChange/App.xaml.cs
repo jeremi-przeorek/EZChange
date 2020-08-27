@@ -11,6 +11,7 @@ namespace EZChange
         {
             InitializeComponent();
 
+            Plugin.Iconize.Iconize.With(new Plugin.Iconize.Fonts.FontAwesomeRegularModule());
             MainPage = new NavigationPage(new IngredientsPage());
         }
 

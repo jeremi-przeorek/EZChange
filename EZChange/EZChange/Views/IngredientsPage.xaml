@@ -8,18 +8,24 @@
              Title="{Binding Title}">
     <NavigationPage.TitleView>
         <StackLayout Orientation="Horizontal">
-            <Button Text="Sort by" 
-                        Command="{Binding DisplaySortByOptionsCommand}"
-                    HorizontalOptions="StartAndExpand"></Button>
             <Label Text="{Binding Title}"
-                   HorizontalOptions="CenterAndExpand"
+                   HorizontalOptions="StartAndExpand"
                    VerticalOptions="CenterAndExpand"
                    FontAttributes="Bold"
-                   FontSize="Header"></Label>
-                <Button Text="Settings"
-                        Command="{Binding DisplaySettingsPageCommand}"
-                        HorizontalOptions="EndAndExpand"></Button>
-            </StackLayout>
+                   Margin="10"
+                   FontSize="Title"></Label>
+            <Button Text="&#x0f160;"
+                   Command="{Binding DisplaySortByOptionsCommand}"
+                   FontFamily="{StaticResource FontAwesomeSolid}"
+                   FontSize="Title"
+                   VerticalOptions="Center"></Button>
+            <Button Text="&#x0f013;"
+                   Command="{Binding DisplaySettingsPageCommand}"
+                   FontFamily="{StaticResource FontAwesomeSolid}"
+                   FontSize="Title"
+                   Margin="10"
+                   VerticalOptions="Center"></Button>
+        </StackLayout>
     </NavigationPage.TitleView>
     <ContentPage.Content>
         <StackLayout>
@@ -32,13 +38,14 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell Height="60">
-                            <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                            <StackLayout Orientation="Horizontal" 
+                                         VerticalOptions="Center">
                                 <Label Text="{Binding Name}"
-                                       FontSize="Title"
+                                       FontSize="Large"
                                        Margin="20"></Label>
                                 <Label Text="{Binding ActualAmount}"
                                        HorizontalOptions="EndAndExpand"
-                                       FontSize="Title"
+                                       FontSize="Large"
                                        TextColor="{Binding Color}"
                                        Margin="20"></Label>
                             </StackLayout>

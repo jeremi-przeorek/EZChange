@@ -22,8 +22,14 @@
                     </TableSection>
                 </TableRoot>
             </TableView>
+            
             <Button Text="Connect"
-                    Command="{Binding Connect}"></Button>
+                    Margin="10,10,10,10"
+                    Command="{Binding Connect}"
+                    BackgroundColor="#77D0EB"
+                    CornerRadius="20"
+                    FontFamily="{StaticResource Lato}"
+                    FontSize="Large"></Button>
             <Label Text="{Binding TcpStatus}"></Label>
         </StackLayout>
     </ContentPage.Content>

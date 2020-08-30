@@ -27,10 +27,13 @@ namespace EZChange.ViewModels
 
             Ingredients = new ObservableCollection<Ingredient>() { indg1, indg2, indg3, indg4, indg5, indg6 };
 
+            IngredientsUnfilter = Ingredients;
+
             ShowIngredientDetailPageCommand = new Command<Ingredient>(vm => ShowIngredientDetailPage(vm));
             DisplaySortByOptionsCommand = new Command(DisplaySordByOptions);
             DisplaySettingsPageCommand = new Command(DisplaySettingsPage);
             RefreshIngredientsListCommand = new Command(RefreshIngredientsList);
+            TextChangedInSearchBarCommand = new Command<string>(TextChangedInSearchBar);
         }
 
         public string Title => "Amounts list";
@@ -41,6 +44,21 @@ namespace EZChange.ViewModels
             get => _ingredients;
             private set => SetValue(ref _ingredients, value);
         }
+
+        public ObservableCollection<Ingredient> IngredientsUnfilter { get; set; }
+
+        private string searchBarText;
+
+        public string SearchBarText
+        {
+            get { return searchBarText; }
+            set
+            {
+                searchBarText = value;
+                TextChangedInSearchBar(value);
+            }
+        }
+
 
         private bool _isRefreshing;
         public bool IsRefreshing
@@ -53,6 +71,7 @@ namespace EZChange.ViewModels
         public ICommand DisplaySortByOptionsCommand { get; private set; }
         public ICommand RefreshIngredientsListCommand { get; private set; }
         public ICommand DisplaySettingsPageCommand { get; private set; }
+        public ICommand TextChangedInSearchBarCommand { get; private set; }
 
         private void ShowIngredientDetailPage(Ingredient ingredient)
         {
@@ -107,6 +126,7 @@ namespace EZChange.ViewModels
                 TcpSocketService.Send(request);
                 Ingredients = new ObservableCollection<Ingredient>(
                     TcpSocketService.GetResponse<IEnumerable<Ingredient>>());
+                IngredientsUnfilter = Ingredients;
             }
             catch (Exception e)
             {
@@ -114,6 +134,19 @@ namespace EZChange.ViewModels
             }
 
             IsRefreshing = false;
+        }
+
+        private void TextChangedInSearchBar(string input)
+        {
+            if (!string.IsNullOrEmpty(input))
+            {
+                Ingredients = new ObservableCollection<Ingredient>(
+                    IngredientsUnfilter.Where(x => x.Name.StartsWith(input)));
+            }
+            else
+            {
+                Ingredients = IngredientsUnfilter;
+            }
         }
     }
 }

@@ -30,6 +30,15 @@
                 <On Platform="iOS"
                 Value="FontAwesome5Free-Regular" />
             </OnPlatform>
+
+            <OnPlatform x:TypeArguments="x:String"
+                    x:Key="Lato">
+                <On Platform="Android"
+                Value="Lato-Regular" />
+                <On Platform="iOS"
+                Value="Lato-Regular" />
+            </OnPlatform>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

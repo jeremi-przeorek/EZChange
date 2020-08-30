@@ -3,38 +3,49 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              mc:Ignorable="d"
              x:Class="EZChange.Views.IngredientsPage"
              Title="{Binding Title}">
+
+    <!-- Title View-->
     <NavigationPage.TitleView>
-        <StackLayout Orientation="Horizontal">
+        <StackLayout Orientation="Horizontal"
+                     HorizontalOptions="FillAndExpand" 
+                     VerticalOptions="CenterAndExpand">
             <Label Text="{Binding Title}"
-                   HorizontalOptions="StartAndExpand"
+                    HorizontalOptions="StartAndExpand"
                    VerticalOptions="CenterAndExpand"
                    FontAttributes="Bold"
-                   Margin="10"
+                   FontFamily="{StaticResource Lato}"
                    FontSize="Title"></Label>
             <Button Text="&#x0f160;"
                    Command="{Binding DisplaySortByOptionsCommand}"
                    FontFamily="{StaticResource FontAwesomeSolid}"
+                   TextColor="Black"
                    FontSize="Title"
                    VerticalOptions="Center"></Button>
             <Button Text="&#x0f013;"
                    Command="{Binding DisplaySettingsPageCommand}"
                    FontFamily="{StaticResource FontAwesomeSolid}"
+                   TextColor="Black"
                    FontSize="Title"
-                   Margin="10"
                    VerticalOptions="Center"></Button>
         </StackLayout>
     </NavigationPage.TitleView>
+
+    <!-- List view with Amounts List-->
     <ContentPage.Content>
         <StackLayout>
+            <SearchBar Text="{Binding SearchBarText}"></SearchBar>
             <ListView HasUnevenRows="True" 
                       ItemTapped="ListView_ItemTapped"
                       ItemsSource="{Binding Ingredients}"
                       IsPullToRefreshEnabled="True"
                       RefreshCommand="{Binding RefreshIngredientsListCommand}"
-                      IsRefreshing="{Binding IsRefreshing}">
+                      IsRefreshing="{Binding IsRefreshing}"
+                      BackgroundColor="Transparent"
+                      SeparatorColor ="#655faa">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell Height="60">
@@ -42,11 +53,13 @@
                                          VerticalOptions="Center">
                                 <Label Text="{Binding Name}"
                                        FontSize="Large"
-                                       Margin="20"></Label>
+                                       Margin="20"
+                                           FontFamily="{StaticResource Lato}"></Label>
                                 <Label Text="{Binding ActualAmount}"
                                        HorizontalOptions="EndAndExpand"
                                        FontSize="Large"
                                        TextColor="{Binding Color}"
+                                   FontFamily="{StaticResource Lato}"
                                        Margin="20"></Label>
                             </StackLayout>
                         </ViewCell>
